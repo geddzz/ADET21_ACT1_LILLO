@@ -6,9 +6,25 @@
 
 import 'dart:io';
 
+typedef PassInt = void Function(int);
+
 main() async {
-  var file = File("input.txt");
+  var file = File("bank.txt");
   var contents;
+  var answer;
+
+  if (answer == '1') {
+    // Balance
+  } else if (answer == '2') {
+    // Withdraw
+  } else if (answer == '3') {
+    // Deposit
+  } else if (answer == '4') {
+    // Exit
+    exit(0);
+  } else {
+    // Invalid Input
+  }
 
   if (await file.exists()) {
     // Read File
@@ -20,4 +36,21 @@ main() async {
     //print(await fileCopy.exists());
     //print(await fileCopy.length());
   }
+}
+
+class BankAction(){
+  void get_balance(){
+    // get balance
+  }
+  void Withdraw(){
+    // Withdraw
+  }
+  void Deposit(){
+    // Deposit
+  }
+}
+
+class BankAccount implements BankAction{
+  double balance;
+  
 }
