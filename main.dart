@@ -43,7 +43,9 @@ main() async {
       var bank_update = await File('bank.txt').writeAsString(new_balance);
     } else if (answer == '3') {
       // Deposit
-      bank1.deposit(balance);
+      new_balance = bank1.deposit(balance);
+      // Rewrite File
+      var bank_update = await File('bank.txt').writeAsString(new_balance);
     } else if (answer == '4') {
       // Exit
       stdout.writeln("Thank You!");
@@ -74,8 +76,11 @@ class bank_action {
   }
 
   // deposit
-  void deposit(var balance) async {
-    stdout.writeln("Balance is $balance");
+  String deposit(var balance) {
+    stdout.writeln("Enter Value to Deposit:");
+    value = stdin.readLineSync();
+    new_balance = double.parse(balance) + double.parse(value);
+    return new_balance.toString();
   }
 }
 
@@ -92,11 +97,18 @@ class BankAccount implements bank_action {
     stdout.writeln("Enter Value to Withdraw:");
     value = stdin.readLineSync();
     new_balance = double.parse(balance) - double.parse(value);
+    // print new_balance
+    stdout.writeln("New Balance is $new_balance");
     return new_balance.toString();
   }
 
   // deposit
-  void deposit(var balance) async {
-    stdout.writeln("Balance is $balance");
+  String deposit(var balance) {
+    stdout.writeln("Enter Value to Deposit:");
+    value = stdin.readLineSync();
+    new_balance = double.parse(balance) + double.parse(value);
+    // print new_balance
+    stdout.writeln("New Balance is $new_balance");
+    return new_balance.toString();
   }
 }
