@@ -9,12 +9,20 @@ import 'dart:io';
 typedef PassInt = void Function(int);
 
 main() async {
-  var file = File("bank.txt");
-  var contents;
+  var bank1 = BankAccount();
   var answer;
-  var balance;
 
   while (answer != 4) {
+    // get balance
+    var file = File("bank.txt");
+    var contents;
+    var balance;
+    // read contents
+    contents = await file.readAsString();
+    // convert to double
+    double.parse(contents);
+    balance = contents;
+
     stdout.writeln("--- Menu ---");
     stdout.writeln("1. Balance");
     stdout.writeln("2. Withdraw");
@@ -26,38 +34,54 @@ main() async {
 
     if (answer == '1') {
       // Balance
+      bank1.get_balance(balance);
     } else if (answer == '2') {
       // Withdraw
     } else if (answer == '3') {
       // Deposit
     } else if (answer == '4') {
       // Exit
+      stdout.writeln("Thank You!");
       exit(0);
     } else {
       // Invalid Input
       stdout.writeln("Invalid Input!");
     }
   }
-
-  contents = await file.readAsString();
-  double.parse(contents);
-  balance = contents;
-  //stdout.writeln("Balance is $balance");
-
   // Write File
-  var bank_update = await File('bank.txt').writeAsString(balance);
+  //var bank_update = await File('bank.txt').writeAsString(balance);
 }
 
 class bank_action {
-  void get_balance() {
-    // get balance
-    stdout.writeln("balance in bank action");
+  // get balance
+  void get_balance(var balance) async {
+    stdout.writeln("Balance is $balance");
+  }
+
+  // withdraw
+  void withdraw(var balance) async {
+    stdout.writeln("Balance is $balance");
+  }
+
+  // deposit
+  void deposit(var balance) async {
+    stdout.writeln("Balance is $balance");
   }
 }
 
 class BankAccount implements bank_action {
-  void get_balance() {
-    // get balance
-    stdout.writeln("balance in bank account");
+  // get balance
+  void get_balance(var balance) async {
+    stdout.writeln("Balance is $balance");
+  }
+
+  // withdraw
+  void withdraw(var balance) async {
+    stdout.writeln("Balance is $balance");
+  }
+
+  // deposit
+  void deposit(var balance) async {
+    stdout.writeln("Balance is $balance");
   }
 }
