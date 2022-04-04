@@ -11,12 +11,13 @@ typedef PassInt = void Function(int);
 main() async {
   var bank1 = BankAccount();
   var answer;
+  var new_balance;
 
   while (answer != 4) {
     // get balance
     var file = File("bank.txt");
     var contents;
-    var balance;
+    String balance;
     // read contents
     contents = await file.readAsString();
     // convert to double
@@ -37,8 +38,12 @@ main() async {
       bank1.get_balance(balance);
     } else if (answer == '2') {
       // Withdraw
+      new_balance = bank1.withdraw(balance);
+      // Rewrite File
+      var bank_update = await File('bank.txt').writeAsString(new_balance);
     } else if (answer == '3') {
       // Deposit
+      bank1.deposit(balance);
     } else if (answer == '4') {
       // Exit
       stdout.writeln("Thank You!");
@@ -53,14 +58,19 @@ main() async {
 }
 
 class bank_action {
+  var value;
+  double new_balance = 0;
   // get balance
-  void get_balance(var balance) async {
+  void get_balance(var balance) {
     stdout.writeln("Balance is $balance");
   }
 
   // withdraw
-  void withdraw(var balance) async {
-    stdout.writeln("Balance is $balance");
+  String withdraw(var balance) {
+    stdout.writeln("Enter Value to Withdraw:");
+    value = stdin.readLineSync();
+    new_balance = double.parse(balance) - double.parse(value);
+    return new_balance.toString();
   }
 
   // deposit
@@ -70,14 +80,19 @@ class bank_action {
 }
 
 class BankAccount implements bank_action {
+  var value;
+  double new_balance = 0;
   // get balance
-  void get_balance(var balance) async {
+  void get_balance(var balance) {
     stdout.writeln("Balance is $balance");
   }
 
   // withdraw
-  void withdraw(var balance) async {
-    stdout.writeln("Balance is $balance");
+  String withdraw(var balance) {
+    stdout.writeln("Enter Value to Withdraw:");
+    value = stdin.readLineSync();
+    new_balance = double.parse(balance) - double.parse(value);
+    return new_balance.toString();
   }
 
   // deposit
