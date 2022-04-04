@@ -12,45 +12,52 @@ main() async {
   var file = File("bank.txt");
   var contents;
   var answer;
+  var balance;
 
-  if (answer == '1') {
-    // Balance
-  } else if (answer == '2') {
-    // Withdraw
-  } else if (answer == '3') {
-    // Deposit
-  } else if (answer == '4') {
-    // Exit
-    exit(0);
-  } else {
-    // Invalid Input
+  while (answer != 4) {
+    stdout.writeln("--- Menu ---");
+    stdout.writeln("1. Balance");
+    stdout.writeln("2. Withdraw");
+    stdout.writeln("3. Deposit");
+    stdout.writeln("4. Exit");
+    stdout.writeln("------------");
+    stdout.writeln("Enter Menu No: ");
+    answer = stdin.readLineSync();
+
+    if (answer == '1') {
+      // Balance
+    } else if (answer == '2') {
+      // Withdraw
+    } else if (answer == '3') {
+      // Deposit
+    } else if (answer == '4') {
+      // Exit
+      exit(0);
+    } else {
+      // Invalid Input
+      stdout.writeln("Invalid Input!");
+    }
   }
 
-  if (await file.exists()) {
-    // Read File
-    contents = await file.readAsString();
-    print(contents);
+  contents = await file.readAsString();
+  double.parse(contents);
+  balance = contents;
+  //stdout.writeln("Balance is $balance");
 
-    // Write File
-    //var fileCopy = await File('output.txt').writeAsString(contents);
-    //print(await fileCopy.exists());
-    //print(await fileCopy.length());
-  }
+  // Write File
+  var bank_update = await File('bank.txt').writeAsString(balance);
 }
 
-class BankAction(){
-  void get_balance(){
+class bank_action {
+  void get_balance() {
     // get balance
-  }
-  void Withdraw(){
-    // Withdraw
-  }
-  void Deposit(){
-    // Deposit
+    stdout.writeln("balance in bank action");
   }
 }
 
-class BankAccount implements BankAction{
-  double balance;
-  
+class BankAccount implements bank_action {
+  void get_balance() {
+    // get balance
+    stdout.writeln("balance in bank account");
+  }
 }
